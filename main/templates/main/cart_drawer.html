@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4 text-center fw-bold text-success">Your Cart</h2>
+
+  {% if cart_items %}
+    {% for cart_item in cart_items %}
+    <div class="card mb-4 border-0 shadow-sm rounded-4" data-item-id="{{ cart_item.item.id }}">
+  <div class="card-body d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+    <div class="d-flex align-items-center gap-3 w-100">
+      <img src="{{ cart_item.item.image.url }}" class="rounded-3" width="80" height="80" style="object-fit: cover; border: 1px solid #ddd;" />
+      <div>
+        <h5 class="mb-1 fw-semibold">{{ cart_item.item.name }}</h5>
+        <p class="text-muted mb-0">₹<span class="item-price">{{ cart_item.item.price|floatformat:2 }}</span></p>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+      <button class="btn btn-outline-secondary btn-sm decrement-btn"><b>−</b></button>
+      <input type="text" class="form-control form-control-sm fw-semibold text-center quantity-input" style="width: 50px;" value="{{ cart_item.quantity }}" readonly>
+      <button class="btn btn-outline-secondary btn-sm increment-btn"><b>+</b></button>
+    </div>
+
+    <a href="{% url 'remove_from_cart' cart_item.item.id %}" class="btn btn-outline-danger btn-sm" title="Remove">
+      <i class="bi bi-trash3-fill fs-5"></i>
+    </a>
+
+  </div>
+</div>
+    {% endfor %}
+
+    <div class="card border-0 shadow-sm p-4 mt-4 rounded-4">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <h4 class="fw-bold text-dark mb-3 mb-md-0">Total: ₹{{ total|floatformat:2 }}</h4>
+        <a href="{% url 'checkout' %}" class="btn btn-success btn-lg px-4">
+          <i class="bi bi-bag-check-fill me-2"></i>Proceed to Checkout
+        </a>
+      </div>
+    </div>
+
+  {% else %}
+    <div class="mt-5 text-center fs-5 fw-semibold">
+      Your cart is empty
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+{% if messages %}
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+    {% for message in messages %}
+      <div class="toast align-items-center text-white bg-{{ message.tags }} border-0 mb-2"
+           role="alert"
+           aria-live="assertive"
+           aria-atomic="true"
+           data-bs-delay="3000"
+           data-bs-autohide="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            {{ message }}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+    <h4 class="text-center text-primary-emphasis fw-bold fs-2 mb-4">Login</h4>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" required id="username">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" required id="password">
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+    <div class="text-center mt-3">
+      <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

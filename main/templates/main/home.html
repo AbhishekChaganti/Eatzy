@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+{% load static%}
+{% block content %}
+<div class="position-relative">
+  <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="hero-image" />
+  <div class="overlay-text">
+    <h1 class="display-1 fw-bold mt-5">Good Food Great Mood</h1>
+    <p class="fs-5">Fresh ingredients. Authentic flavors. Fast delivery.</p>
+  </div>
+</div>
+
+<div class="container my-5 text-center" id="menu-section">
+  <h2 class="display-5 text-danger-emphasis fw-bold">Menu Categories</h2>
+  <div class="btn mt-3">
+    <a href="{% url 'home' %}?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}" class="btn btn-outline-danger fw-bold">All</a>
+    <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}category=Starters" class="btn btn-outline-danger fw-bold">Starters</a>
+    <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}category=Main Course" class="btn btn-outline-danger fw-bold">Main Course</a>
+    <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}category=Desserts" class="btn btn-outline-danger fw-bold">Desserts</a>
+    <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}category=Beverages" class="btn btn-outline-danger fw-bold">Beverages</a>
+
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    {% for item in items %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ item.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" />
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text text-muted">{{ item.description|truncatewords:15 }}</p>
+          <p class="fw-bold">₹{{ item.price }}</p>
+          <a href="{% url 'add_to_cart' item.id %}" class="btn btn-success w-100 add-to-cart-btn" data-url="{% url 'add_to_cart' item.id %}">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+      <p class="text-center">No items found in this category.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

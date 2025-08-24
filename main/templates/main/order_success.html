@@ -1,0 +1,8 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="container my-5 text-center">
+  <h2>Order Placed Successfully!</h2>
+  <p>Thank you for your order. Your delicious food is on its way!</p>
+  <a href="{% url 'home' %}" class="btn btn-primary mt-3">Return to Home</a>
+</div>
+{% endblock %}
