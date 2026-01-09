@@ -19,7 +19,6 @@ A Django-based food ordering web application that allows users to browse food it
 - **Database**: SQLite (default), supports MySQL and PostgreSQL
 - **Frontend**: HTML, CSS, JavaScript
 - **Authentication**: Django Auth + Social Auth App Django
-- **Payments**: Razorpay
 - **Deployment**: Docker + Gunicorn
 - **Other Libraries**:
   - python-decouple for environment variables
