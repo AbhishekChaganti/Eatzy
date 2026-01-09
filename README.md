@@ -9,7 +9,6 @@ A Django-based food ordering web application that allows users to browse food it
 - **Shopping Cart**: Add/remove items from cart with quantity management
 - **Order Management**: Place orders, view order history, and track order status (Pending, Cancelled, Delivered)
 - **User Profiles**: Manage profile information including profile picture, phone, email, and address
-- **Payment Integration**: Secure payments using Razorpay
 - **Admin Panel**: Django admin interface for managing food items, orders, and users
 - **Responsive Design**: Built with HTML, CSS, and JavaScript for a user-friendly interface
 - **Docker Support**: Containerized application for easy deployment
